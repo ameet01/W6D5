@@ -1,0 +1,30 @@
+html {
+  font-family: 'Lobster';
+}
+
+
+.clock {
+  font-size: 25px;
+  width: 35%;
+  margin: auto;
+}
+
+.clock h1 {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.clock p {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.clockinfo {
+  font-family: 'georgia';
+  font-weight: 700;
+  border: 1px solid black;
+  background: orange;
+  padding: 20px;
+  color: white;
+}

@@ -9,7 +9,7 @@ class Root extends React.Component {
   render() {
     return (
       <div>
-        <Clock />
+        <Clock className='clock' />
       </div>
     );
   }

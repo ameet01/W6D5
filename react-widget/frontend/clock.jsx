@@ -1,9 +1,12 @@
 import React from 'react';
 
 class Clock extends React.Component {
-  constructor() {
-    super();
-    this.state = { time: new Date() };
+  constructor(props) {
+    super(props);
+    this.intervalId = null;
+    this.state = { time: new Date()};
+    this.tick = this.tick.bind(this);
+    this.props = props;
   }
 
   tick() {
@@ -11,10 +14,28 @@ class Clock extends React.Component {
     this.setState({ time });
   }
 
+  componentDidMount() {
+    const intervalId = setInterval(this.tick, 1000);
+    console.log(intervalId);
+    this.intervalId = intervalId;
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
+
   render() {
+    const time = this.state.time;
     return (
-      <div>
-        <h1>{this.state.time.getHours()}:{this.state.time.getMinutes()}:{this.state.time.getSeconds()}</h1>
+      <div className={this.props.className}>
+        <h1>Clock</h1>
+        <div className='clockinfo'>
+          <p>
+            <span>Time</span>
+            <span>{time.getHours()}:{time.getMinutes()}:{time.getSeconds()}</span>
+          </p>
+          <p><span>Date</span>  <span>{time.toDateString()}</span></p>
+        </div>
       </div>
     );
   }
