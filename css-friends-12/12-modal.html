@@ -17,6 +17,22 @@
   <link rel="stylesheet" href="css/10-posts.css" type="text/css">
   <link rel="stylesheet" href="css/11-icons.css" type="text/css">
   <link rel="stylesheet" href="css/12-modal.css" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+  $(function(){
+
+    $("body").on("click", ".js-modal-open", function(event){
+      event.preventDefault();
+      $(".modal").addClass("is-open");
+    });
+
+    $("body").on("click", ".js-modal-close", function(event){
+      event.preventDefault();
+      $(".modal").removeClass("is-open");
+    });
+
+  });
+  </script>
 </head>
 <body>
 
@@ -231,6 +247,21 @@
     </ul>
 
   </footer>
+  <section class="modal">
+    <section class="modal-screen js-modal-open">
 
+    </section>
+    <section class="modal-form input submit">
+      <h1>Welcome</h1>
+      <span class='closebutton js-modal-open'>&times;</span>
+      <p>Please sign in to continue.</p>
+      <label>Email</label>
+      <input class="input" type="text" name="" value="sennacy@appacademy.io">
+      <label>password</label>
+      <input class="password" type="text" name="" value="">
+      <button type="button" name="button">Sign In</button>
+      <span class="button-alternative">or<strong>Cancel</strong></span>
+    </section>
+  </section>
 </body>
 </html>
