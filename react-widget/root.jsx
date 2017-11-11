@@ -1,6 +1,7 @@
 import React from 'react';
 import Clock from './frontend/clock';
 import Tabs from './frontend/tabs';
+import Weather from './frontend/weather';
 
 class Root extends React.Component {
   constructor() {
@@ -25,6 +26,7 @@ class Root extends React.Component {
     return (
       <div>
         <Clock className='clock' />
+        <Weather />
         <Tabs className='tabs' data={this.tabs}/>
       </div>
     );
