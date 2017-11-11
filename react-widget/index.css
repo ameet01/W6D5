@@ -10,6 +10,7 @@ html {
 }
 
 .clock h1 {
+  font-size: 60px;
   text-align: left;
   margin-bottom: 10px;
 }
@@ -27,4 +28,48 @@ html {
   background: orange;
   padding: 20px;
   color: white;
+}
+.tabs {
+  font-family: 'georgia';
+  margin: auto;
+  width: 250px;
+  margin-top: 100px;
+}
+
+.tabs ul {
+  list-style: none;
+  display: flex;
+  margin: 0 0;
+}
+
+.tabs li {
+  border: 2px solid black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 0 5px;
+  width: 33%;
+  margin: 0;
+  background: lightblue;
+}
+
+.tabs li:hover{
+  background: black;
+  color: white;
+}
+
+.selected {
+  font-weight: bold;
+  border-bottom: none;
+}
+
+.tabs section {
+  border: 2px solid black;
+  /*border-top: none;*/
+  height: 200px;
+  background: lightblue;
+}
+
+.tabs p {
+  text-align: center;
+  margin-top: 90px;
 }
