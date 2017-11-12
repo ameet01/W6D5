@@ -1,48 +1,73 @@
 import React from 'react';
 //9b989fdfe5aac8208da67b8bc1a6044e
 
+const toQueryString = (obj) => {
+  let parts = [];
+  for (let i in obj) {
+      if (obj.hasOwnProperty(i)) {
+          parts.push(`${encodeURIComponent(i)}=${encodeURIComponent(obj[i])}`);
+      }
+  }
+  return parts.join('&');
+};
+
 class Weather extends React.Component {
-  constructor() {
-    super();
-    this.latitude = null;
-    this.longitude = null;
-    this.state = {city: "", temperature: 0};
+  constructor(props) {
+    super(props);
+    this.state = {weather: null};
     this.getWeatherData = this.getWeatherData.bind(this);
-    this.getInfo = this.getInfo.bind(this);
   }
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      this.latitude = pos.coords.latitude;
-      this.longitude = pos.coords.longitude;
-      this.setState({city, temperature}, this.getInfo);
-    });
+    navigator.geolocation.getCurrentPosition(this.getWeatherData);
   }
 
-  getInfo() {
-    let weatherData = this.getWeatherData();
-    this.city = weatherData.name;
-    this.temperature = parseInt(weatherData.temp) * (9/5) - 459.67;
-  }
-  
-  getWeatherData() {
-    const request = new XMLHttpRequest();
-    const url = `http://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longitude}&APPID=9b989fdfe5aac8208da67b8bc1a6044e`;
-    request.open('GET', url, true);
-    request.onload = (e) => {
-      if (request.status >= 200 && request.status < 400) {
-        console.log(request.responseText);
-      } else {
-        console.error(request.statusText);
+  getWeatherData(location) {
+    let lat = location.coords.latitude;
+    let long = location.coords.longitude;
+    let url = 'http://api.openweathermap.org/data/2.5/weather?';
+    let params = {
+      lat: location.coords.latitude,
+      lon: location.coords.longitude
+    };
+    url += toQueryString(params);
+    const apiKey = '9b989fdfe5aac8208da67b8bc1a6044e';
+    // This is our API key; please use your own!
+    url += `&APPID=${apiKey}`;
+
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = () => {
+      //ready state of DONE means this is complete
+      if (xmlhttp.status === 200 && xmlhttp.readyState === XMLHttpRequest.DONE) {
+        const data = JSON.parse(xmlhttp.responseText);
+        console.log(data);
+        this.setState({weather: data});
       }
     };
-    request.send();
+
+    xmlhttp.open('GET', url, true);
+    xmlhttp.send();
   }
 
   render() {
+    let content = <div></div>;
+
+    if(this.state.weather) {
+      content = <div>
+                  <p>{this.state.weather.name}</p>
+                  <p>{parseInt(this.state.weather.main.temp) * (9/5) - 459.67} degrees</p>
+                </div>;
+    } else {
+      content = <div className='loading'>
+        <p>Loading Weather...</p>
+      </div>;
+    }
+
     return (
       <div>
-        <p>{this.state.city}</p>
-        <p>{this.state.temperature}</p>
+        <div className='weather'>
+          <h1>Weather</h1>
+          {content}
+        </div>
       </div>
     );
   }

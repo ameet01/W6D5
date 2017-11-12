@@ -73,3 +73,39 @@ html {
   text-align: center;
   margin-top: 90px;
 }
+
+.weather {
+  text-align: center;
+  margin-top: 70px;
+  font-size: 30px;
+}
+
+.alist {
+  text-align: center;
+  font-size: 30px;
+  width: 300px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.alist h1 {
+  font-size: 40px;
+}
+
+.alist input {
+  border: 1px solid black;
+}
+
+.namelist {
+  border: 1px solid black;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.searchbar {
+  margin: auto;
+  width: 100%;
+  font-weight: 400;
+  font-family: arial;
+  font-size: 23px;
+}
